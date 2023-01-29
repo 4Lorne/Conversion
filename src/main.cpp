@@ -6,7 +6,7 @@
 using namespace std;
 
 int main() {
-//TODO: Ask David - Space in file path, trailing whitespace, blank enter
+//TODO: Ask David - Space in file path
 
     //Variables
     string line;
@@ -19,27 +19,42 @@ int main() {
     ifstream inputFile;
     ofstream outputFile;
 
-    cout << "Enter the desired path of the CPP input file:"s;
-    cin >> filepath;
+    cout << "Enter the desired path of the CPP input file:";
+    do { // Validates empty entry and blank space entry
+        getline(cin,filepath);
+        if (filepath.length() == 0){
+            cout << "Enter the desired path of the CPP input file:";
+        }
+    } while (filepath.empty());
+
     try {
         setInputFile(inputFile,filepath,validPathCPP);
     } catch(CustomException& e) {
         e.what(); // Programmer defined exception
     }
 
+
     cout << "Enter the desired path of the HTML output file:";
-    cin >> filepath;
+    do {
+        getline(cin,filepath);
+        if (filepath.length() == 0){
+            cout << "Enter the desired path of the HTML output file:";
+        }
+    } while (filepath.empty());
+
     try {
         setOutputFile(outputFile,filepath,validPathHTML);
     } catch(exception& e){
         e.what(); // Default exception
     }
 
+
     try {
         writeFile(inputFile, outputFile, line, findLeft); //Writes from the CPP file to the HTML file
     } catch (bad_exception& e){
         cerr << "Error. Please try again" << e.what() << "\n"; //Library exception
     }
+
 
     cout << "Finished writing " << filepath << ".";
 
