@@ -6,7 +6,6 @@
 using namespace std;
 
 int main() {
-//TODO: Ask David - Space in file path
 
     //Variables
     string line;
@@ -18,6 +17,8 @@ int main() {
 
     ifstream inputFile;
     ofstream outputFile;
+
+    cout << "File paths must have no spaces & conform to Windows file path rules. (ie C:\\Desktop\\input.cpp)" << endl;
 
     cout << "Enter the desired path of the CPP input file:";
     do { // Validates empty entry and blank space entry
